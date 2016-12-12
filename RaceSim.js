@@ -8,8 +8,8 @@ var height, width;
 // Setup initial variables and start game loop
 function main(){
     // Canvas dimensions
-    height = 900;
-    width = 900;
+    height = 600;
+    width = 600;
 
     // Create Canvas
     canvas = document.createElement("canvas");
@@ -25,7 +25,7 @@ function main(){
     ctx = canvas.getContext("2d");
 
     // Add canvas to html5 file
-    document.appendChild(canvas);
+    document.body.appendChild(canvas);
 
     // Kick off game loop
     run();
