@@ -128,3 +128,6 @@ Vector.dot = function(a, b) {
 Vector.cross = function(a, b) {
     return a.x * b.y - a.y * b.x;
 };
+Vector.length = function(a, b) {
+    return Math.sqrt(Vector.dot(a, b));
+};
