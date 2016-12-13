@@ -1,6 +1,5 @@
 /*
  Simple 2D JavaScript Vector Class
- Hacked from evanw's lightgl.js
 
  SOURCE:
  https://github.com/evanw/lightgl.js/blob/master/src/vector.js
