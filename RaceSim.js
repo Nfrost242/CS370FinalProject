@@ -18,7 +18,7 @@ function main(){
 
     // Handle unsupported browsers
     if (!(!!canvas.getContext && canvas.getContext("2d"))) {
-        alert("Your browser doesn't support HTML5, please update to latest version");
+        alert("Your browser doesn't support HTML5");
     }
 
     // Get 2D context
@@ -49,5 +49,3 @@ function draw(){}
 
 // Start game
 main();
-
-
