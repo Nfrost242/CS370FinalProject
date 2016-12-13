@@ -3,15 +3,13 @@
  */
 
 function DNA(genes){
-    this.mutationRate = 0.01;
-
-    this.maxAccl = 5;
-    this.minAccl = -5;
+    this.mutationRate = 0.001;
+    this.maxAccl = 2;
 
     if(genes){
         this.genes = genes;
     }else{
-        this.genes = [new Vector(1,0)]; // Arbitrary default
+        this.genes = []; // default
     }
 }
 
@@ -21,30 +19,22 @@ DNA.prototype = {
         var childGenes = [];
         var mateGenes = mate.getGenes();
 
-        var min = Math.min(this.genes.length, mateGenes.length);
-        var max = Math.max(this.genes.length, mateGenes.length);
+        var avgLength = Math.floor((this.genes.length + mateGenes.length)/2);
+        var spliceIndex = Math.floor(Math.random() * avgLength);
 
-        for(var i=0; i<min; i++){
-            if (this.genes[i].equals(mateGenes[i])) { // Keep their genes if they are the same
-                childGenes.push(this.genes[i]);
-            }
-            else{ // Else its random
-                var r = Math.random();  // 50 percent chance to take gene from each parent if genes are not the same
-
-                if(r>0.5){
-                    childGenes.push(this.genes[i]);
+        for(var i=0; i< avgLength; i++){
+            if(i < spliceIndex){
+                if(this.genes[i]){
+                    childGenes.push(this.genes[i].clone());
                 }else{
-                    childGenes.push(mateGenes[i]);
+                    childGenes.push(mateGenes[i].clone());
                 }
-            }
-        }
-
-        // Replace the rest of the gene array with the longer lived parents genes
-        for(var j=min; j<max; j++){
-            if(this.genes[i]){
-                childGenes.push(this.genes[i])
             }else{
-                childGenes.push(mateGenes[i]);
+                if(mateGenes[i]){
+                    childGenes.push(mateGenes[i].clone());
+                }else{
+                    childGenes.push(this.genes[i].clone());
+                }
             }
         }
 
@@ -72,8 +62,8 @@ DNA.prototype = {
 
     // Creates a random gene
     randomGene: function(){
-        var randX = (Math.random() * (this.maxAccl-this.minAccl)) - this.minAccl;
-        var randY = (Math.random() * (this.maxAccl-this.minAccl)) - this.minAccl;
+        var randX = (Math.random() * (2*this.maxAccl)) - this.maxAccl;
+        var randY = (Math.random() * (2*this.maxAccl)) - this.maxAccl;
 
         return new Vector(randX, randY);
     }

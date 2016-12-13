@@ -18,7 +18,7 @@ function main(){
 
     // Create Canvas
     canvas = document.createElement("canvas");
-    canvas.setAttribute("oncontextmenu", "return false;");
+    canvas.setAttribute("oncontextmenu", "return false;"); // Get rid of right click functionality on canvas
     canvas.width = width;
     canvas.height = height;
 
@@ -33,6 +33,7 @@ function main(){
 
     var startingPos = track.getCenterOfCell(2,1);
     population = new Population(startingPos.x,startingPos.y, 20);
+    //population = new Population(300,300, 20);
     population.setGoal(track.getGoalLocation()); // Population needs to track goal to calculate fitness of cars
 
     // Add canvas to html5 file
@@ -65,9 +66,8 @@ function update(){
         track.detectCollision(carArray[i]);
 
         var carPos = carArray[i].getPosition();
-        if(carPos.x < 0 || carPos.x > width || carPos.y < 0 || carPos.y > height){
+        if(carPos.x < 0 || carPos.x > width || carPos.y < 0 || carPos.y > height)
             carArray[i].kill();
-        }
     }
 }
 
@@ -83,22 +83,21 @@ function draw(){
 function handleClick(e){
     e.preventDefault();
 
+    // Adjust offsets
     var rect = canvas.getBoundingClientRect();
     var x =  e.clientX - rect.left;
     var y = e.clientY - rect.top;
-    var wallValue = e.which == 1; // Create wall if Left mouse clicked, erase if Right
+    var wallValue = e.which == 1; // Create wall if Left mouse button clicked, erase wall if Right mouse button is clicked
 
 
     if(e.type == "mousedown"){
         track.setClickFlag(true);
         track.addWall(x, y, wallValue);
     }
-    else if(e.type == "mouseup"){
+    else if(e.type == "mouseup")
         track.setClickFlag(false);
-    }
-    else if(e.type == "mousemove"){
+    else if(e.type == "mousemove")
         track.addWall(x, y, wallValue);
-    }
 
 }
 // Start game

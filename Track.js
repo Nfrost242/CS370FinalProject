@@ -91,7 +91,8 @@ Track.prototype = {
                    car.kill();
                 }
 
-                if(car.getPosition().length() - this.goal.length() < this.gridScale/2){ // Distance less than radius of goal
+                var goalCoord = this.getGoalLocation();
+                if(car.getPosition().distanceTo(goalCoord) <= this.gridScale/2){ // Distance less than radius of goal
                     car.foundGoal();
                 }
             }
