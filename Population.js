@@ -68,11 +68,10 @@ Population.prototype = {
         // Proportionally fill mating pool with most fit individuals
         this.matingPool = [];
         for (var k = 0; k < this.populationSize; k++) {
-            var n = Math.max(0,Math.floor((this.Cars[k].getFitness()) * 100)); // drop bottom of population
+            var n = Math.floor(this.Cars[k].getFitness() * 100);
 
             for (var l = 0; l < n; l++) {
                 this.matingPool.push(this.Cars[k]);
-                console.log(this.Cars[k]);
             }
         }
     },
@@ -95,7 +94,7 @@ Population.prototype = {
             var parentB = this.matingPool[this.getRandomMate(this.matingPool.length)].getDNA();
 
             var childDNA = parentA.crossover(parentB);
-            //childDNA.mutation();
+            childDNA.mutation();
 
             children.push(new Car(this.startX, this.startY, childDNA));
         }

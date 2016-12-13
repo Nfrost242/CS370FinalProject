@@ -90,10 +90,10 @@ Car.prototype = {
         var fit = 0;
 
         if(this.goalFound){
-            var timeFactor = 1/Math.max(1,Math.pow(this.timeToGoal,0.5));// Fitness will increase as time to goal decreases
+            var timeFactor = 1/Math.max(1,this.timeToGoal);// Fitness will increase as time to goal decreases
             fit = 1 + timeFactor; // Time is the sole factor of fitness when goal is found, fitness gets a +1 so that no car that didn't find the goal will have higher fitness
         }else{
-            fit = (0.25*travelFactor + 0.25*distanceFactor + 0.25*ageFactor);  // Fitness is evenly weighted average of age and distance, with a penalty of only being able to achieve max of 0.5 fitness
+            fit = (0.25*travelFactor + 0.25*distanceFactor + 0.25*ageFactor + 0.25);  // Fitness is evenly weighted average of age and distance adding up to 1
         }
 
         this.fitness = fit;

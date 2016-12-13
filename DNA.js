@@ -3,7 +3,7 @@
  */
 
 function DNA(genes){
-    this.mutationRate = 0.001;
+    this.mutationRate = 0.05;
     this.maxAccl = 2;
 
     if(genes){
